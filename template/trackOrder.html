@@ -1,0 +1,54 @@
+{% extends 'base 1.html' %}
+{% block content %}
+	<script>
+		function validation()
+		{
+			var details=document.getElementById("details");
+			if(details.value.length==0)
+			{
+				alert("Enter the details");
+				details.focus();
+				return false;
+			}
+			else
+			{
+				return true;
+			}
+		}
+	</script>
+		 <div class="col-lg-6 mt-5 mt-lg-0">
+
+          <form method="post" action="{% url 'trackOrderAction' %}">
+		{% csrf_token %}
+		{% for v in data %}
+              <div class="form-group mt-3">
+                <input type="text" class="form-control" name="orderid" id="orderid" value="{{v.id}}">
+              </div>
+              <div class="form-group mt-3">
+                <textarea class="form-control" name="details" rows="3" id="details"></textarea>
+              </div>
+		 <div class="form-group mt-3">
+	<div class="text-center"><button type="submit" onclick="return validation()">Track order</button></div>
+	{% endfor %}
+	</div>
+            </form>
+	</div>
+{% endblock %}
+		
+			<table>
+				{% for v in data %}
+				<tr>
+					<td>Order Id</td>
+					<td><input type="text" name="orderid" value={{v.id}}></td>
+				</tr>
+				<tr>
+					<td>Details</td>
+					<td><textarea name="details" rows="20" cols="20" id="details" ></textarea></td>
+				</tr>
+				<tr>
+					<td></td>
+					<td><input type="button" value="track order" onclick="return validation()"></td>
+				</tr>
+				{% endfor %}
+			</table>
+		</form>

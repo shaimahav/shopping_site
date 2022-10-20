@@ -1,0 +1,18 @@
+<script>
+		$(document).ready.(function(){
+						$("#username").change(function(){
+																		var username=$("#username").val();
+																		$.ajax({
+																			url:"{% url 'checkUsername' %}",
+																			data:{'username':username},
+																			success:function(data){
+													     					  if(data.valid=="exist")
+																			{
+																			alert("User name already exist!!");
+																			$("#username").val('');
+																			}
+													    			
+										       });
+									     });
+					});
+	</script>

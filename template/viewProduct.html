@@ -1,0 +1,76 @@
+	{% extends 'base2_1.html' %}
+{% block content %}
+	
+<title></title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+	<link href='https://fonts.googleapis.com/css?family=Roboto:400,100,300,700' rel='stylesheet' type='text/css'>
+
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+	
+	<link rel="stylesheet" href="/static/table-03/css/style.css">
+
+	</head>
+
+
+	<section class="ftco-section" id="hero">
+
+		<div class="container" >
+
+			<div class="row justify-content-center">
+				<div class="col-md-6 text-center mb-5" >
+					<h2 class="heading-section">View Product</h2>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col-md-12" >
+					
+					<div class="table-wrap">
+						<table class="fonts"  style="font-color:#f1ecec;font-weight:20px">
+					   
+					      <tr>
+					        <th><span style="color:yellow"><h3>Name</h3></span></th>
+					        <th><span style="color:yellow"><h3>Picture</h3></span></th>
+					        <th><span style="color:yellow"><h3>Price</h3></span></th>
+					        <th><span style="color:yellow"><h3>Details</h3></span></th>
+					        <th><span style="color:yellow"><h3>Stock</h3></span></th>
+					        <th><span style="color:yellow"><h3>Category</h3></span></th>
+					      </tr>
+					   
+					    <tbody>
+						{% for v in data %}	
+					      <tr>
+					        <th scope="row" class="scope" >{{v.name}}</th>
+					        <td><img src="{{v.picture.url}}" height="20px" width="20px" alt="no pic"></td>
+					        <td>{{v.price}}</td>
+					        <td>{{v.details}}</td>
+						<td>{{v.stock}}</td>
+					        <td>{{v.categoryid.id}}</td>
+						 
+					        <td><a href="{% url 'delete' v.id %}" class="btn btn-primary">Delete</a></td>
+						 <td><a href="{% url 'edit' v.id %}" class="btn btn-primary">Edit</a></td>
+					      </tr>
+					        {% endfor %}
+					    </tbody>
+					  </table>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</section>
+
+	<script src="/static/table-03/js/jquery.min.js"></script>
+  <script src="/static/table-03/js/popper.js"></script>
+  <script src="/static/table-03/js/bootstrap.min.js"></script>
+  <script src="/static/table-03/js/main.js"></script>
+{% if messages %}
+	{% for msg in messages %}
+		<script>
+			alert('{{msg}}')
+		</script>
+	{% endfor%}
+{% endif%}
+{% endblock %}

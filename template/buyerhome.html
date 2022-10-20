@@ -1,0 +1,24 @@
+{% extends 'base4.html' %}
+{% block content %}
+	<body>
+		{% for v in data %}
+			<h1>Welcome    {{v.username}}</h1>
+		{% endfor %}
+		
+			
+			
+		
+	{% if messages %}
+	{% for msg in messages %}
+		<script>
+			alert({{msg}}'')
+		</script>
+	{% endfor %}
+{% endif %}
+{% endblock %}
+"{% url 'updateProfile' %}">UpdateProfile</a>
+			<a href="{% url 'viewAllProduct' %}">View all products</a>
+			<a href="{% url 'viewOrder' %}">view all orders</a>
+			<a href="{% url 'searchProduct' %}">Search</a>
+			<a href="{% url 'searchProductCategory' %}">Search product by category and price</a>
+			<a href="{% url 'logout' %}">Logout</a>

@@ -1,0 +1,207 @@
+{% extends 'base 1.html' %}
+{% block content %}
+<script type="text/javascript">
+		function validation()
+		{
+			var num=/^[0-9]+$/;
+			var name=document.getElementById("name");
+			var dob=document.getElementById("dob");
+			var address=document.getElementById("address");
+			var phone=document.getElementById("phone");
+			var username=document.getElementById("username");
+			var password=document.getElementById("password");
+			if(name.value.length==0)
+				{
+					alert("Enter name");
+					name.focus();
+					return false;
+				}
+				else if(dob.value.length==0)
+				{
+					alert("Enter the date of birth");
+					dob.focus();
+					return false;
+				}
+				else if(address.value.length==0)
+				{
+					alert("Enter address");
+					address.focus();
+					return false;
+				}
+				else if(phone.value.length==0)
+				{
+					alert("Enter phone number")
+					phone.focus();
+					return false;
+				}
+				else if(!phone.value.match(num))
+				{
+					alert("Enter valid  phone number")
+					phone.focus();
+					return false;
+				}
+				else if(username.value.length==0)
+				{
+					alert("Enter username")
+					username.focus();
+					return false;
+				}
+				else if(password.value.length==0)
+				{
+					alert("Enter the password");
+					password.focus();
+					return false;
+				}
+				else
+				{
+					return true;
+				}
+
+			}
+	
+	</script>
+	
+	 <div class="col-lg-6 mt-5 mt-lg-0">
+		
+          <form method="post" action="{% url 'updateSellerAction' %}" enctype="multipart/form-data">
+		{% csrf_token %}
+		{% for v in data %}
+              <div class="row">
+		  <div class="col-md-6 form-group">
+                  <input type="text" name="name" class="form-control" id="name" value={{v.name}} required>
+                </div>
+		<div class="col-md-6 form-group" style="color:white;font-weight:bold;font-size:20px">
+             {% if v.gender == 'male' %}
+						<input type="radio" name="gender" value="male" checked="true">male
+						<input type="radio" name="gender" value="female">female
+						{% else %}
+						<input type="radio" name="gender" value="male">male
+						<input type="radiio" name="gender" value="female" checked="true">female
+						{% endif %}			
+                </div>
+		<div class="form-group mt-3">
+		 <div class="row">
+		  <div class="col-md-6 form-group">
+                  <input type="date" name="dob" class="form-control" id="dob" value={{v.dob}} required>
+                </div>
+		 <div class="col-md-6 form-group mt-3 mt-md-0">
+                  
+						<select name="country" class="form-control" >
+							<options value={{v.country}}>{{v.country}}</options>
+							<option value="india">India</option>
+							<option value="canada">Canada</option>
+						</select>
+                </div>
+              </div>
+	       </div>
+	<div class="form-group mt-3">
+                <input type="text" class="form-control" name="phone" id="phone" value="{{v.phone}}"
+             </div>
+              <div class="form-group mt-3">
+                <textarea class="form-control" name="address" rows="3" id="address"  required>{{v.address}}</textarea>
+              </div>
+<div class="form-group mt-3">
+	<div class="row">
+  		<div class="col-md-6 form-group">
+                  <img src="{{v.image.url}}" height="100px" width="100px" alt="no pic">
+                </div>
+		<div class="col-md-6 form-group" style="color:white;font-weight:bold;font-size:20px">
+             <input type="file" class="form-control" name="image" id="image">	
+                </div>
+	</div>
+
+
+	<div class="form-group mt-3">
+                  <input type="text" class="form-control" name="username" id="username" value="{{v.username}}">
+                </div>
+	<div class="form-group mt-3">
+                  <input type="password" class="form-control" name="password" id="password" value="{{v.password}}" >
+                </div>
+             	  <div class="form-group mt-3">
+	<div class="text-center"><button type="submit" onclick="return validation()">Register</button></div>
+	</div>
+            </form>
+
+          </div>
+
+        </div>
+		
+</div>
+	{% endfor %}
+	</div>
+		
+{% if messages %}
+	{% for msg in messages %}
+		<script>
+			alert('{{msg}}')
+		</script>
+	{% endfor %}
+{% endif %}
+{% endblock %}
+<form method="post" action="{% url 'updateSellerAction' %}" enctype="multipart/form-data">
+		{% csrf_token %}
+			<table>
+				{% for v in data %}
+				<tr>
+					<td>Name</td>
+					<td><input type="text" name="name" value="{{v.name}}"id="name"></td>
+				</tr>
+				<tr>
+					<td>Gender</td>
+					<td>
+						{% if v.gender == 'male' %}
+						<input type="radio" name="gender" value="male" checked="true">male
+						<input type="radio" name="gender" value="female">female
+						{% else %}
+						<input type="radio" name="gender" value="male">male
+						<input type="radiio" name="gender" value="female" checked="true">female
+						{% endif %}
+					</td>
+				</tr>
+				<tr>
+					<td>DOB</td>
+					<td><input type="date" name="dob" value="{{v.dob}}" id="dob"></td>
+				</tr>
+				<tr>
+					<td>Country</td>
+					<td>
+						<select name="country" >
+							<options value={{v.country}}>{{v.country}}</options>
+							<option value="india">India</option>
+							<option value="canada">Canada</option>
+						</select>
+					</td>
+				</tr>
+				<tr>
+					<td>Address</td>
+					<td>
+						<textarea name="address" rows="10" cols="10" id="address">{{v.address}}</textarea>
+					</td>
+				</tr>
+				<tr>
+					<td>Phone</td>
+					<td><input type="text" name="phone" value="{{v.phone}}" id="phone"></td>
+				</tr>
+				<tr>
+					<td>Image</td>
+					<td><img src="{{v.image.url}}" height="100px" width="100px" alt="no pic">
+					       <input type="file" name="image" >
+					</td>
+				</tr>
+				<tr>
+					<td>Username</td>
+					<td><input type"text" name="username" value={{v.username}} id="username"></td>
+				</tr>
+				<tr>
+					<td>Password</td>
+					<td><input type="password" name="password" value="{{v.password}}" id="password"></td>
+				</tr>
+				
+				<tr>
+					<td></td>
+					<td><input type="submit" value="updateseller" onclick="return validation()"></td>
+				</tr>
+			{% endfor %}
+			</table>
+		</form>
+	</body>

@@ -1,0 +1,103 @@
+{% extends 'base2_1.html' %}
+{% block content %}
+<script src="/static/jquery-1.8.3.min.js"></script>
+<script>
+	$(document).ready(function(){
+					$(".table").hide()
+					$(".fonts").show()
+					
+					
+
+
+
+
+				
+				     })
+</script>
+
+<title></title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+	<link href='https://fonts.googleapis.com/css?family=Roboto:400,100,300,700' rel='stylesheet' type='text/css'>
+
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+	
+	<link rel="stylesheet" href="/static/table-03/css/style.css">
+
+	</head>
+	
+
+	<section class="ftco-section" id="hero">
+
+		<div class="container" >
+
+			<div class="row justify-content-center">
+				<div class="col-md-6 text-center mb-5" >
+					<h2 class="heading-section">View Track Details</h2>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col-md-12" >
+					
+					<div class="table-wrap">
+						<table class="fonts"  style="font-color:#f1ecec;font-weight:20px">
+					   
+					      <tr>
+					        <th><span style="color:yellow"><h3>Order Id</h3></span></th>
+					        <th><span style="color:yellow"><h3>Details</h3></span></th>
+					        <th><span style="color:yellow"><h3>Date</h3></span></th>
+					        <th><span style="color:yellow"><h3>Time</h3></span></th>
+					       
+					      </tr>
+					   
+					    <tbody>
+						{% for v in data %}	
+					      <tr>
+					        <th scope="row" class="scope" >{{v.id}}</th>
+					        <td>{{v.details}}</td>
+					        <td>{{v.date}}</td>
+					        <td>{{v.time}}</td>
+					        
+					        {% endfor %}
+					    </tbody>
+					  </table>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</section>
+
+	<script src="/static/table-03/js/jquery.min.js"></script>
+  <script src="/static/table-03/js/popper.js"></script>
+  <script src="/static/table-03/js/bootstrap.min.js"></script>
+  <script src="/static/table-03/js/main.js"></script>
+
+
+
+
+
+
+
+{% endblock %}
+			
+<table>
+				
+				<tr>
+					<th>Order id</th>
+					<th>Details</th>
+					<th>Date</th>
+					<th>Time</th>
+				</tr>
+				{% for v in data %}
+				<tr>
+					<td>{{v.id}}</td>
+					<td>{{v.details}}</td>
+					<td>{{v.date}}</td>
+					<td>{{v.time}}</td>
+				</tr>
+				{% endfor %}
+			</table>
+		

@@ -1,0 +1,137 @@
+{% extends 'base2_1.html' %}
+{% block content %}
+<script src="/static/jquery-1.8.3.min.js"></script>
+<script>
+	$(document).ready(function(){
+					$(".table").hide()
+					$(".fonts").show()
+					
+					
+
+
+
+
+				
+				     })
+</script>
+
+<title></title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+	<link href='https://fonts.googleapis.com/css?family=Roboto:400,100,300,700' rel='stylesheet' type='text/css'>
+
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+	
+	<link rel="stylesheet" href="/static/table-03/css/style.css">
+
+	</head>
+	
+
+	<section class="ftco-section" id="hero">
+
+		<div class="container" >
+
+			<div class="row justify-content-center">
+				<div class="col-md-6 text-center mb-5" >
+					<h2 class="heading-section">View All Orders</h2>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col-md-12" >
+					
+					<div class="table-wrap">
+						<table class="fonts"  style="font-color:#f1ecec;font-weight:20px">
+					   
+					      <tr>
+					        <th><span style="color:yellow"><h3>ProductName</h3></span></th>
+					        <th><span style="color:yellow"><h3>Sellername</h3></span></th>
+					        <th><span style="color:yellow"><h3>Picture</h3></span></th>
+					        <th><span style="color:yellow"><h3>Price</h3></span></th>
+					        <th><span style="color:yellow"><h3>Quantity</h3></span></th>
+					        <th><span style="color:yellow"><h3>TotalPrice</h3></span></th>
+						<th><span style="color:yellow"><h3>ShippingAddress</h3></span></th>
+						 <th><span style="color:yellow"><h3>Date/h3></span></th>
+					        <th><span style="color:yellow"><h3>Time</h3></span></th>
+						<th><span style="color:yellow"><h3>Status</h3></span></th>
+					      </tr>
+					   
+					    <tbody>
+						{% for v in data %}	
+					      <tr>
+					        <th scope="row" class="scope" >{{v.productid.name}}</th>
+					        <td>{{v.sellerid.name}}</td>
+					        <td><img src="{{v.productid.picture.url}}" height="40px" width="40px" alt="no pic"></td>
+					        <td>{{v.productid.price}}</td>
+					        <td>{{v.quantity}}</td>
+						 <td>{{v.totalprice}}</td>
+						<td>{{v.shippingaddress}}</td>
+					        <td>{{v.date}}</td>
+					        <td>{{v.time}}</td>
+ 						<td>{{v.status}}</td>
+						{% if v.status == "accepted" %}
+						 <td><a href="{% url 'viewTrackDetails' v.id %}" class="btn btn-primary">View tracking details</a></td>
+						{% endif %}
+					      </tr>
+					        {% endfor %}
+					    </tbody>
+					  </table>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</section>
+
+	<script src="/static/table-03/js/jquery.min.js"></script>
+  <script src="/static/table-03/js/popper.js"></script>
+  <script src="/static/table-03/js/bootstrap.min.js"></script>
+  <script src="/static/table-03/js/main.js"></script>
+
+
+
+
+
+
+
+{% endblock %}
+
+
+
+
+	<body>
+		<table>
+			<tr>
+				<th>Product Name</th>
+				<th>Buyer Name</th>
+				<th>Picture</th>
+				<th>Price</th>
+				<th>Quantity</th>
+				<th>Toatal Price</th>
+				<th>Shipping Address</th>
+				<th>Date</th>
+				<th>Time</th>
+				<th>Status</th>
+			</tr>
+			{% for v in data %}
+			<tr>
+				<td>{{v.<td>
+				<td>{{v.buyerid.name}}</td>
+				<td><img src="{{v.productid.picture.url}}" height="100px" width="100px"></td>
+				<td>{{v.price}}</td>
+				<td>{{v.quantity}}</td>
+				<td>{{v.totalprice}}</td>
+				<td>{{v.shippingaddress}}</td>
+				<td>{{v.date}}</td>
+				<td>{{v.time}}</td>
+				<td>{{v.status}}</td>
+				<td><a href="{% url 'cancel' v.id %}">Cancel</a></td>
+				{% if v.status == "accepted" %}
+				<td><a href="{% url 'viewTrackDetails' v.id %}">View tracking details</a></td>
+				{% endif %}
+			</tr>/
+			{% endfor %}
+		</table>
+	</body>
+</html>

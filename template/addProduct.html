@@ -1,0 +1,125 @@
+{% extends 'base 1.html' %}
+{% block content %}
+<script type="text/javascript">
+	function validation()
+	{
+		var alphabets=/^[a-zA-Z]+$/;
+		var num=/^[0-9]+$/;
+
+		var name=document.getElementById("name");
+		var picture=document.getElementById("picture");
+		var price=document.getElementById("price");
+		var details=document.getElementById("details");
+		var stock=document.getElementById("stock");
+		var category=document.getElementById("category")
+		if(name.value.length==0)
+		{
+			alert("Enter the name of the product");
+			name.focus();
+			return false();
+		}
+		else if(!name.value.match(alphabets))
+		{
+			alert("Enter a valid name");
+			name.focus();
+			return false;
+		}
+		else if(picture.value.length==0)
+		{
+			alert("Please upload the image");
+			picture.focus();
+			return false;
+		}
+		else if(price.value.length==0)
+		{
+			alert("Enter the price")
+			price.focus();
+			return false;
+		}
+		else if(!price.value.match(num))
+		{
+			alert("Enter a valid price");
+			price.focus();
+			return false;
+		}
+		else if(details.value.length==0)
+		{
+			alert("Please Enter the details of the product")
+			details.focus();
+			return false;		
+		}
+		else if(stock.value.length==0)
+		{
+			alert("Enter stock of the product");
+			stock.focus();
+			return false();
+		}
+		else if(!stock.value.match(num))
+		{
+			alert("Enter valid number");
+			stock.focus();
+			return false;
+		}
+		else if(category.value.length==0)
+		{
+			alert("Select the category")
+			category.focus();
+			return false;
+		}
+		else
+		{
+			return true;
+		}
+	}
+
+	
+</script>
+	<div class="col-lg-6 mt-5 mt-lg-0">
+
+            <form method="post" action="{% url 'addProductAction' %}" enctype="multipart/form-data">
+		{% csrf_token %}
+              <div class="row">
+	  <div class="col-md-6 form-group">
+                  <input type="text" name="name" class="form-control" id="name" placeholder="Product name" required>
+                </div>
+	     	  <div class="col-md-6 form-group mt-3 mt-md-0">
+                <input type="text" class="form-control" name="price" id="phone" placeholder="price">
+              </div>
+	 </div>
+              <div class="form-group mt-3">
+                <textarea class="form-control" name="details" rows="3" id="details" placeholder="details" required></textarea>
+              </div>
+    	<div class="form-group mt-3">
+                  <input type="file" class="form-control" name="picture" id="picture" placeholder="pictureupload">
+                </div>
+
+	<div class="form-group mt-3">
+		 <div class="row">
+		  <div class="col-md-6 form-group">
+                  <input type="text" name="stock" class="form-control" id="stock" placeholder="stock" required>
+                </div>
+		 <div class="col-md-6 form-group mt-3 mt-md-0">
+                  
+						<select name="category" id="category" class="form-control">
+						<option value="">-----options----</option>
+						{% for v in data %}
+						<option value="{{v.id}}">{{v.category_name}}</option>
+						{% endfor %}
+					       </select>
+		</div>
+		</div>
+		</div>
+		<div class="form-group mt-3">
+	<div class="text-center"><button type="submit" onclick="return validation()">Register</button></div>
+	</div>
+            </form>
+		<div>
+		
+{% if messages %}
+	{% for msg in messages %}
+		<script>
+			alert('{{msg}}')
+		</script>
+	{% endfor %}
+{% endif %}
+{% endblock %}

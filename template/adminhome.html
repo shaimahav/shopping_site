@@ -1,0 +1,24 @@
+{% extends 'base2.html' %}
+{% block content %}
+	<body>
+		{% for v in data %}
+			<h1>Welcome              {{v.username}}</h1>
+		{% endfor %}
+		<li>
+			<a href="{% url 'viewAllSellers' %}">View all sellers</a>
+		</li>
+		<li>
+			<a href="{% url 'addCategory' %}">Add category</a>
+		</li>
+		<li>
+			<a href="{% url 'logout' %}">Logout</a>
+		</li>
+		</body>
+{% if messages %}
+	{% for msg in messages %}
+		<script>
+			alert({{msg}}'')
+		</script>
+	{% endfor %}
+{% endif %}
+{% endblock %}

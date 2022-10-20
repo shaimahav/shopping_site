@@ -1,0 +1,178 @@
+{% extends 'base2_1.html'  %}
+{% block content %}
+<script src="/static/jquery-1.8.3.min.js"></script>
+<script>
+	$(document).ready(function(){
+					$(".table").hide()
+					$(".fonts").show()
+					
+					
+
+
+
+
+				
+				     })
+</script>
+
+
+<title></title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+	<link href='https://fonts.googleapis.com/css?family=Roboto:400,100,300,700' rel='stylesheet' type='text/css'>
+
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+	
+	<link rel="stylesheet" href="/static/table-03/css/style.css">
+
+	</head>
+	
+
+	<section class="ftco-section" id="hero">
+
+		<div class="container" style="margin-top:-164px">
+
+			<div class="row justify-content-center">
+				<div class="col-md-6 text-center mb-5" >
+					<h2 class="heading-section">View All Sellers</h2>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col-md-12" >
+					
+					<div class="table-wrap">
+						<table class="fonts"  style="font-color:#f1ecec;font-weight:20px">
+					   
+					      <tr>
+					        <th><span style="color:yellow"><h3>Name</h3></span></th>
+					        <th><span style="color:yellow"><h3>Picture</h3></span></th>
+					        <th><span style="color:yellow"><h3>Price</h3></span></th>
+					        <th><span style="color:yellow"><h3>Details</h3></span></th>
+					        <th><span style="color:yellow"><h3>Stock</h3></span></th>
+					        <th><span style="color:yellow"><h3>Category</h3></span></th>
+						<th><span style="color:yellow"><h3>Seller</h3></span></th>
+					      </tr>
+					   
+					    <tbody>
+						{% for v in data %}	
+					      <tr>
+					        <th scope="row" class="scope" >{{v.name}}</th>
+					        <td><img src="{{v.picture.url}}" height="20px" width="20px"></td>
+					        <td>{{v.price}}</td>
+					        <td>{{v.details}}</td>
+					        <td>{{v.stock}}</td>
+						 <td>{{v.categoryid.category_name}}</td>
+ 						<td>{{v.sellerid.name}}</td>
+					        <td><a href="{% url 'addtocart' v.id %}" class="btn btn-primary">Add to cart</a></td>
+						
+					      </tr>
+					        {% endfor %}
+<tr><a href="{% url 'viewCart' %}" class="btn btn-primary" style="margin-left:1107px;margin-top:17px">View cart</a></tr>
+					    </tbody>
+						
+					  </table>
+					
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</section>
+
+	<script src="/static/table-03/js/jquery.min.js"></script>
+  <script src="/static/table-03/js/popper.js"></script>
+  <script src="/static/table-03/js/bootstrap.min.js"></script>
+  <script src="/static/table-03/js/main.js"></script>
+
+
+
+
+{% if messages %}
+	{% for msg in messages %}
+		<script>
+			alert('{{msg}}')
+		</script>
+	{% endfor %}
+{% endif %}
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+<title></title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+	<link href='https://fonts.googleapis.com/css?family=Roboto:400,100,300,700' rel='stylesheet' type='text/css'>
+
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+	
+	<link rel="stylesheet" href="/static/table-03/css/style.css">
+
+	</head>
+	
+
+	<section class="ftco-section" id="hero">
+
+		<div class="container" >
+
+			<div class="row justify-content-center">
+				<div class="col-md-6 text-center mb-5" >
+					<h2 class="heading-section">View All Products</h2>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col-md-12" >
+					
+					<div class="table-wrap">
+						<table class="fonts"  style="font-color:#f1ecec;font-weight:20px">
+					   
+					      <tr>
+					        <th><span style="color:yellow"><h3>Name</h3></span></th>
+					        <th><span style="color:yellow"><h3>Picture</h3></span></th>
+					        <th><span style="color:yellow"><h3>Price</h3></span></th>
+					        <th><span style="color:yellow"><h3>Details of the product</h3></span></th>
+					        <th><span style="color:yellow"><h3>Stock</h3></span></th>
+					        <th><span style="color:yellow"><h3>Categoryid</h3></span></th>
+						<th><span style="color:yellow"><h3>Sellerid</h3></span></th>
+					      </tr>
+					   
+					    <tbody>
+						{% for v in data %}	
+					      <tr>
+					        <th scope="row" class="scope" >{{v.name}}</th>
+					        <td><img src="{{v.picture.url}}" height="20px" width="20px"></td>
+					        <td>{{v.price}}</td>
+					        <td>{{v.details}}</td>
+					        <td>{{v.stock}}</td>
+						 <td>{{v.categoryid.}}</td>
+ 						<td>{{v.sellerid}}</td>
+					        <td><a href="{% url 'addtocart' v.id %}" class="btn btn-primary>Add to cart</a></td>
+					     </tr>
+					        {% endfor %}
+					    </tbody>
+					  </table>
+						<li><a href="{% url 'viewCart' %}">View Cart</a></li>
+						
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</section>
+
+	<script src="/static/table-03/js/jquery.min.js"></script>
+  <script src="/static/table-03/js/popper.js"></script>
+  <script src="/static/table-03/js/bootstrap.min.js"></script>
+  <script src="/static/table-03/js/main.js"></script>
+	

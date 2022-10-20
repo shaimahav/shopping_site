@@ -1,0 +1,47 @@
+{% extends 'base 1.html' %}
+{% block content %}
+<script type="text/javascript">
+	function validation()
+	{
+		var alpha=/^[a-zA-Z]+$/;
+		var num=/^[0-9]+$/;
+		
+
+		var category_name=document.getElementById("category_name");
+		if(category_name.value.length==0)
+		{
+			alert("Enter the categor name");
+			category_name.focus();
+			return false;
+		}
+		else
+		{
+			return true;
+		}
+	}
+</script>
+	<body>
+
+		<div class="col-lg-8 mt-5 mt-lg-0">
+
+           <form method="post" action="{% url 'addCategoryAction' %}">
+	{% csrf_token %}
+              <div class="row">
+                <div class="col-md-6 form-group" style="margin-left:226px">
+                  <input type="text" name="category_name" class="form-control" id="category_name" placeholder="category_name" required>
+                </div>
+              </div>
+                <div class="my-3">
+              <div class="text-center"><button type="submit" onclick="return validation()">Add Category</button></div>
+            </form>
+
+         
+	</body>
+{% if messages %}
+	{% for msg in messages %}
+		<script>
+			alert('{{msg}}')
+		</script>
+	{% endfor %}
+{% endif %}
+{% endblock %}

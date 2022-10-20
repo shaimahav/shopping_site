@@ -1,0 +1,108 @@
+{% extends 'base 1.html' %}
+{% block content %}
+	<script src="/static/jquery-1.8.3.min.js"></script>
+	<script>
+		$(document).ready(function(){
+					$("#quantity").change(function(){
+									var quantity=parseInt($("#quantity").val())
+									var price=parseInt($("#price").val())
+									var totalprice=quantity*price
+									$("#totalprice").val(totalprice);
+								      })
+						
+					})
+	</script>
+	<script type="text/javascript">
+		function validation()
+		{
+			var num=/^[0-9]+$/;
+			var shippingaddress=document.getElementById("shippingaddress");
+			var contactno=document.getElementById("contactno");
+			var quantity=document.getElementById("quantity");
+			if(shippingaddress.value.length==0)
+			{
+				alert("Enter shipping address");
+				shippingaddress.focus();
+				return false;
+			}
+			else if(contactno.value.length==0)
+			{
+				alert("Enter a contactno");
+				contactno.focus();
+				return false;
+			}
+			else if(!contactno.value.match(num))
+			{
+				alert("Enter a valid contact no");
+				contactno.focus();
+				return false;
+			}
+			else if(quantity.value.length==0)
+			{
+				alert("Enter the quantity");
+				quantity.focus();
+				return false;
+			}
+			else if(!quantity.value.match(num))
+			{
+				alert("Enter a valid quantity")
+				quantity.focus();
+				return false;
+			}
+			else
+			{
+				return true;			
+			}
+			
+		}		
+	</script>
+ <div class="col-lg-6 mt-5 mt-lg-0">
+
+            <form method="post" action="{% url 'addtoCartAction' %}" enctype="multipart/form-data">
+		{% csrf_token %}
+		{% for v in data %}
+             
+		<div class="form-group mt-3">
+                  <input type="text" name="productid"  class="form-control" value="{{v.id}}" readonly="true">
+		 </div>
+		<div class="form-group mt-3">
+		<input type="text" name="productname" class="form-control" value="{{v.name}}" readonly="true"></td>
+		</div>
+		<div class="form-group mt-3">
+		  <input type="text" name="price" class="form-control" value="{{v.price}}" id ="price"  readonly="true">
+                </div>
+		
+		
+		<div class="form-group mt-3">
+	<div class="row">
+  		<div class="col-md-6 form-group">
+                  <img src="{{v.picture.url}}" height="100px" width="100px" alt="no pic">
+                </div>
+		
+	</div>
+	{% endfor %}
+              <div class="form-group mt-3">
+                <textarea class="form-control" name="shippingaddress" rows="5" cols="5" id="shippingaddress" placeholder="shipping address" required></textarea>
+              </div>
+		<div class="form-group mt-3">
+                <input type="text" class="form-control" name="contactno" id="contactno"  placeholder="contactno">
+             </div>
+	<div class="form-group mt-3">
+                <input type="text" class="form-control" name="quantity" id="quantity"  placeholder="quantity">
+             </div>
+	<div class="form-group mt-3">
+                <input type="text" class="form-control" name="totalprice" id="totalprice" placeholder="totalprice">
+             </div>
+	 <div class="form-group mt-3">
+	<div class="text-center"><button type="submit" onclick="return validation()">Add to cart</button></div>
+	</div>
+            </form>
+		
+{% if messages %}
+	{% for msg in messages %}
+		<script>
+			alert('{{msg}}')
+		</script>
+	{% endfor %}
+{% endif %}
+{% endblock %}

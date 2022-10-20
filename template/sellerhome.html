@@ -1,0 +1,20 @@
+{% extends 'base3.html' %}
+{% block content %}
+<body>
+	{% for v in data %}
+		<h1>Welcome {{v.username}}</h1>
+	{% endfor %}
+		<a href="{% url 'updateSeller' %}"></a>
+		<a href="{% url 'addProduct' %}"></a>
+		<a href="{% url 'viewProduct' %}"></a>
+		<a href="{% url 'customerOrderView' %}"></a>
+		<a href="{% url 'logout' %}"></a>
+</body>
+{% if messages %}
+	{% for msg in messages %}
+		<script>
+			alert({{msg}}'')
+		</script>
+	{% endfor %}
+{% endif %}
+{% endblock %}

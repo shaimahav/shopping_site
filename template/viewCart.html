@@ -1,0 +1,71 @@
+<html>
+<script type="text/javascript">
+		function validation()
+				     {
+				 var cart=document.getElementById("cartid")
+				var flag=0;	
+				for(var i=0;i<cart.length;i++)
+					{
+						if(cart[i].checked==true)
+						flag=1;
+					}
+					if(flag==0)
+						{
+							alert("item not selected");
+							return false;
+						}
+					
+					
+					else
+						{
+							return true;
+						}
+
+
+				    }
+	</script>
+
+
+	<body>
+		<form method="post" action="{% url 'orderAction' %}" name="form">
+		{% csrf_token %}
+		<table>
+			<tr>
+				<th>Product Id</th>
+				<th>Buyer Id</th>
+				<th>Picture</th>
+				<th>Quantity</th>
+				<th>Price</th>
+				<th>Total Price</th>
+				<th>Shipping Address</th>
+				<th>Contact No</th>
+			</tr>
+			{% for v in data %}
+			<tr>
+				<td>{{v.productid.name}}</td>
+				<td>{{v.buyerid.id}}</td>
+				<td><img src="{{v.productid.picture.url}}" height="100px" width="100px"></td>
+				<td>{{v.quantity}}</td>
+				<td>{{v.productid.price}}</td>
+				<td>{{v.totalprice}}</td>
+				<td>{{v.shippingaddress}}</td>
+				<td>{{v.contactno}}</td>
+				<td><a href="{% url 'delet' v.id %}">delete</a></td>
+				<td><input type="checkbox" name="cartid" value="{{v.id}}" id="cartid" /></td>
+			</tr>
+			{% endfor %}
+			<tr>
+				<td></td>
+				<td><input type="button" value="placeorder" onclick="return validation()"></td>
+			</tr>
+		</table>
+		</form>
+	</body>
+{% if messages %}
+	{% for msg in messages %}
+		<script>
+			alert('{{msg}}')
+		</script>
+	{% endfor %}
+{% endif%}
+</html>
